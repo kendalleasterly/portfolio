@@ -9,9 +9,9 @@ import { Eye } from "lucide-react";
 export const revalidate = 60;
 export default async function ProjectsPage() {
 
-  const featured = allProjects.find((project) => project.slug === "unkey")!;
-  const top2 = allProjects.find((project) => project.slug === "planetfall")!;
-  const top3 = allProjects.find((project) => project.slug === "highstorm")!;
+  const featured = allProjects.find((project) => project.slug === "octave")!;
+  const top2 = allProjects.find((project) => project.slug === "young-tutors")!;
+  const top3 = allProjects.find((project) => project.slug === "ekc")!;
   const sorted = allProjects
     .filter((p) => p.published)
     .filter(
@@ -35,7 +35,7 @@ export default async function ProjectsPage() {
             Projects
           </h2>
           <p className="mt-4 text-zinc-400">
-            All projects have been created in my free time
+            Will be updated shortly!
           </p>
         </div>
         <div className="w-full h-px bg-zinc-800" />
@@ -58,9 +58,6 @@ export default async function ProjectsPage() {
                   </div>
                   <span className="flex items-center gap-1 text-xs text-zinc-500">
                     <Eye className="w-4 h-4" />{" "}
-                    {Intl.NumberFormat("en-US", { notation: "compact" }).format(
-                      0,
-                    )}
                   </span>
                 </div>
 
@@ -94,13 +91,13 @@ export default async function ProjectsPage() {
 
         <div className="grid grid-cols-1 gap-4 mx-auto lg:mx-0 md:grid-cols-3">
           <div className="grid grid-cols-1 gap-4">
-            {sorted
+            {/* {sorted
               .filter((_, i) => i % 3 === 0)
               .map((project) => (
                 <Card key={project.slug}>
                   <Article project={project}  />
                 </Card>
-              ))}
+              ))} */}
           </div>
           <div className="grid grid-cols-1 gap-4">
             {sorted

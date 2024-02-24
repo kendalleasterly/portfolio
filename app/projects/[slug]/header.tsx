@@ -66,13 +66,14 @@ export const Header: React.FC<Props> = ({ project }) => {
 
 					<Link
 						href="/projects"
-						className={`duration-200 hover:font-medium ${
+						className={`flex space-x-4 duration-200 hover:font-medium ${
 							isIntersecting
 								? " text-zinc-400 hover:text-zinc-100"
 								: "text-zinc-600 hover:text-zinc-900"
 						} `}
 					>
 						<ArrowLeft className="w-6 h-6 " />
+						<p>Projects</p>
 					</Link>
 				</div>
 			</div>

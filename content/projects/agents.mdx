@@ -1,0 +1,67 @@
+---
+title: OpenAI Agent Swarm
+description: Use of the OpenAI Assistants API to create specialized agents that talk to each other and execute code on the local device
+published: true
+repository: "kendalleasterly/agents"
+---
+![](https://github.com/kendalleasterly/images/blob/main/agents%20final.jpeg?raw=true)
+
+The [OpenAI Assistants API](https://platform.openai.com/docs/assistants/overview) allows developers to create chat-based assistants that use GPT 3.5, customized with specific instructions. 
+- The flagship feature of these assistants is their ability to create "function calls". 
+- As described by OpenAI, "In an API call, you can describe functions and have the model intelligently choose to output a JSON object containing arguments to call one or many functions."
+- This opens up incredible doors, as we can connect natural language to perform predictable actions in the same way we connect text boxes and buttons to modify data in a typical interface.
+- This project explores two extremely powerful capabilities:
+	- What happens when an AI can create and execute its own code on a device connected to the internet?
+	- What happens when we connect the assistants to each other, rather than having one standalone assistant that just works with a typical API?
+	
+
+## Examples
+
+During testing I've had the system successfully:
+- Convert a specified video
+- Change the brightness, volume, etc. of my computer and put it to sleep
+- Generate a simple HTML file with a specific style and elements
+- Create a chart comparing stock prices
+- Open specified websites
+- Take screenshots of websites
+- List files on my hard drive
+- Create pdfs
+- Perform a google search and open the page
+- Pull data from the NBA api to retrieve current information
+And much more
+
+## Architecture
+
+The architecture is extremely modular, allowing for assistants to easily talk to each other and potentially create a chain of instructions and actions between multiple assistants if they choose.
+
+### UserProxy Agent
+- Interacts with the user, and acts as a proxy to interact with any other agent through a function call.
+	- As a developer we can connect to any other agent by specifying 
+#### API Parameters
+**Instruction:** "Your responsibility is to clearly communicate what the user wants to other agents. Please do not respond to the user until the task is complete, an error has been reported by the relevant agent, or you are certain of your response. Do not communicate using code. When communicating to other agents, simply specify the the task to be completed by the recipient agent."
+
+**`send_message` Function:** "Send tasks to other specialized agents in this group chat."
+- **`task` Property:** "The the task to be completed by the recipient agent. Focus on clarifying what the task entails, rather than providing detailed instructions. Do not respond using code, English only"
+- **`recipient` Property:** "code_assistant is a world class programming AI capable of executing python code locally and installing packages. This environment has access to all standard Python packages and the internet."
+	- *Here we've only described the capabilities of code_assistant, but if we were to add more agents to the swarm we could simply describe a new agent for `UserProxy` to choose from*
+
+### Code Assistant 
+- Writes and executes code on the device this program runs on. It can also choose to install python packages by itself when its code needs it.
+#### API Parameters
+**Instruction:** "As a top-tier programming AI, you are adept at creating accurate Python scripts, and installing modules and packages when necessary. You will properly name files and craft precise Python code with the appropriate imports to fulfill the user's request. Ensure to execute the necessary code before responding to the user. When there is a package or module that isn't installed or can't be found, install it. You will write code to be executed in the user's local environment, and this code can access the internet and external APIs when needed."
+
+**`run_python_file` Function:** "Python file with an appropriate name, containing code that will be saved and executed locally. This environment has access to all standard Python packages and the internet."
+- **`chain_of_thought` Property:** "Think step by step to determine the correct actions that are needed to be taken in order to complete the task."
+	- *Forcing the agent to generate a chain of thought to figure out how it will write the code has been shown to significantly increase the accuracy of the code*
+- **`body` Property:** "Correct contents of a file"
+- **`file_name` Property:** "The name of the python file including the extension"
+
+**`install_package` Function:** "Installs a python module using pip when needed. When running a python file that uses modules not already on the system, install the package"
+- **`package_name` Property:** "The name of the python package to be installed using pip"
+
+
+
+## Additional Info
+
+- I've started exploring methods to integrate this system into a browser, allowing agents to browse the web for a user, using saved login info.
+- Idea and initial code stems came from [VRSEN](https://www.youtube.com/@vrsen)

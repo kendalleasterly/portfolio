@@ -11,20 +11,21 @@ published: true
 ## Features & functionality
 - Responsive, functions the same on mobile.
 - Search page
-- Accounts (Sign in with google)
-	- With playlists and saved songs
+- Accounts
+	- Uses sign in with Google
+	- Each account can have playlists and saved songs
 - Fully functional playlists
-	- With visibility settings (i.e only the user can see the playlist or they can make it public)
+	- Playlists have visibility settings (i.e only the user can see the playlist or they can make it public)
 - Shuffling playlists & albums
 - Album views
 - Backend
-	- Assign each requested song to a youtube video (optimized to not return music videos that have added distracting parts)
-	- Spotify api token distribution
-- Full screen view
-- Caches recently requests tracks using localstorage
+	- Assigns each requested song a youtube video (optimized to not return music videos that have added distracting parts)
+	- Spotify API token distribution
+- Full screen player view
+- Caches recently played tracks' info using localstorage (streaming url, youtube ID)
 - Settings 
-- Streaming audio, programmatically controlls the playback from any part of the application
-	- *Note: Octave does not actually play music, only royalty-free audio to demonstrate the playback capabilities*
+- Streams audio, programmatically controlls the playback from any part of the application
+	- *Note: Octave does not actually play music, it only plays royalty-free audio to demonstrate the playback capabilities*
 
 ## Architecture
 - Next.js
@@ -36,6 +37,7 @@ published: true
 	- Authentication 
 - Tailwind CSS
 - **Onedrive file hosting:** Streaming royalty-free audio
+- **Spoitfy API:** Search for songs and albums, get album for album views
 
 
 ## Problems Faced

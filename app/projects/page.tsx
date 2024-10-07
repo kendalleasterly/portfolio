@@ -10,8 +10,8 @@ export const revalidate = 60;
 export default async function ProjectsPage() {
 
   const featured = allProjects.find((project) => project.slug === "octave")!;
-  const top2 = allProjects.find((project) => project.slug === "young-tutors")!;
-  const top3 = allProjects.find((project) => project.slug === "ekc")!;
+  const top2 = allProjects.find((project) => project.slug === "cassi")!;
+  const top3 = allProjects.find((project) => project.slug === "young-tutors")!;
   const sorted = allProjects
     .filter((p) => p.published)
     .filter(
@@ -35,7 +35,7 @@ export default async function ProjectsPage() {
             Projects
           </h2>
           <p className="mt-4 text-zinc-400">
-            Will be updated shortly!
+            {/* Will be updated shortly! */}
           </p>
         </div>
         <div className="w-full h-px bg-zinc-800" />

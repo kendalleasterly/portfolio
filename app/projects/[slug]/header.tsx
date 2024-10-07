@@ -18,7 +18,7 @@ export const Header: React.FC<Props> = ({ project }) => {
 	const links: { label: string; href: string }[] = [];
 	if (project.repository) {
 		links.push({
-			label: "GitHub",
+			label: "GitHub Code",
 			href: `https://github.com/${project.repository}`,
 		});
 	}
@@ -88,7 +88,7 @@ export const Header: React.FC<Props> = ({ project }) => {
 						</p>
 					</div>
 
-					{/* <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
+					<div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
 						<div className="grid grid-cols-1 gap-y-6 gap-x-8 text-base font-semibold leading-7 text-white sm:grid-cols-2 md:flex lg:gap-x-10">
 							{links.map((link) => (
 								<Link target="_blank" key={link.label} href={link.href}>
@@ -96,7 +96,7 @@ export const Header: React.FC<Props> = ({ project }) => {
 								</Link>
 							))}
 						</div>
-					</div> */}
+					</div>
 				</div>
 			</div>
 		</header>

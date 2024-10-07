@@ -1,8 +1,13 @@
 ---
-title: FlexiTrackr
-description: Fully customizable budgeting app that adapts to a user's specific needs
-repository: kendalleasterly/budgeting
-published: false
+title: Notion Budgeting Integration
+description: View and customize and bank transactions to track budget progress
+repository: kendalleasterly/personal-api/tree/main/functions/src
+date: "2024-03-11"
+published: true
 ---
 
-Coming soon!
+
+- Uses the [Teller API](https://teller.io/) to retrieve new settled transactions in my checking account daily
+	- I scheduled the code to execute daily on a Google Cloud Functions cron job
+- Each transaction is then uploaded to notion through the [Notion API](https://developers.notion.com/), where I can add further customizations and track the progress of my budget throughout the month
+    - The software automatically assigns an emoji to each transaction based on the category given by Teller.

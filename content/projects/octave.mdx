@@ -9,6 +9,7 @@ published: true
 
 ![](https://github.com/kendalleasterly/images/blob/main/octave%20desktop%20render%20best.png?raw=true)
 ## Features & functionality
+- Responsive, functions the same on mobile.
 - Search page
 - Accounts (Sign in with google)
 	- With playlists and saved songs
@@ -16,14 +17,36 @@ published: true
 	- With visibility settings (i.e only the user can see the playlist or they can make it public)
 - Shuffling playlists & albums
 - Album views
-- Full screen view
-- Settings 
 - Backend
-- *Note: Octave does not actually play music, only silent audio with the same length as the song*
+	- Assign each requested song to a youtube video (optimized to not return music videos that have added distracting parts)
+	- Spotify api token distribution
+- Full screen view
+- Caches recently requests tracks using localstorage
+- Settings 
+- Streaming audio, programmatically controlls the playback from any part of the application
+	- *Note: Octave does not actually play music, only royalty-free audio to demonstrate the playback capabilities*
+
+## Architecture
+- Next.js
+- Typescript
+- Firebase
+	- **Firestore:** User account info, playlists, saves tracks with a corresponding youtube idc
+	- **Cloud Functions:** Serverless Node.js-based functions to act as my backend
+	- App Hosting
+	- Authentication 
+- Tailwind CSS
+- **Onedrive file hosting:** Streaming royalty-free audio
+
 
 ## Problems Faced
 
-### Hosting on firebase using Next.js 14
+### Maintaining a Long-Term project
+- I originally used the React-Router framework in 2021 & 2022, but updated to Next.js in early 2024.
+	- During which, I updated my fully javascript codebase to typescript. This was a much needed change.
+- I ported the application from a self-hosted version, to Google Cloud's experimental firebase hosting with Next.js, and now to the officially supported Firebase app hosting
+
+
+### Hosting on Firebase using Next.js 14
 - Every time I navigated using `<Link>` there would be a full page reload
 - This behavior reset the app state between pages
 	- Caused the app to completely forget the currently playing song, and had to re-fetch the authentication state
@@ -33,7 +56,4 @@ published: true
 
 export const dynamic = "force-dynamic"
 ```
-
-## Additional Info
-- Cached track metadata on browser using localstorage
-- Recently migrated the project to typescript when I migrated to Next.js
+- *This was a flaw in Firebase experimental hosting with Next.js, and has been fixed since moving to the officially supported version*

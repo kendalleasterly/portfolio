@@ -32,6 +32,10 @@ export const Article: React.FC<Props> = ({ project }) => {
 				<p className="z-20 mt-4 text-sm  duration-1000 text-zinc-400 group-hover:text-zinc-200">
 					{project.description}
 				</p>
+
+				<p className="z-20 mt-8 text-sm  duration-1000 text-zinc-400 group-hover:text-zinc-200 italic">
+					{project.skills}
+				</p>
 			</article>
 		</Link>
 	);

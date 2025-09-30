@@ -1,7 +1,31 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import remarkGfm from "./util/remark-gfm-safe.js";
+import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+
+const prettyCodeOptions = {
+	theme: {
+		dark: "github-dark",
+		light: "github-light",
+	},
+	onVisitLine(node) {
+		if (!node.children || node.children.length === 0) {
+			node.children = [{ type: "text", value: " " }];
+		}
+	},
+	onVisitHighlightedLine(node) {
+		node.properties = node.properties ?? {};
+		node.properties.className = [
+			...(node.properties.className ?? []),
+			"line--highlighted",
+		];
+	},
+	onVisitHighlightedWord(node) {
+		node.properties = node.properties ?? {};
+		node.properties.className = ["word--highlighted"];
+	},
+};
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 const computedFields = {
@@ -71,6 +95,7 @@ export default makeSource({
 	mdx: {
 		remarkPlugins: [remarkGfm],
 		rehypePlugins: [
+			[rehypePrettyCode, prettyCodeOptions],
 			rehypeSlug,
 			[
 				rehypeAutolinkHeadings,

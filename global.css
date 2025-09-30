@@ -3,8 +3,60 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    color-scheme: dark;
+  }
   .text-edge-outline {
     -webkit-text-stroke: 1px rgba(255,255,255,0.3);
   }
-} 
+  pre[data-theme] {
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    overflow-x: auto;
+    border: none;
+    outline: none;
+    box-shadow: none;
+  }
 
+  code[data-theme] {
+    color: inherit;
+    font-family: inherit;
+  }
+
+  pre[data-theme] .line--highlighted {
+    background-color: transparent;
+  }
+
+  pre[data-theme] .word--highlighted {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 0.25rem;
+    padding: 0.15rem 0.25rem;
+  }
+
+  pre[data-theme]:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  pre[data-theme] code span {
+    color: var(--shiki-dark);
+  }
+
+  @media (prefers-color-scheme: light) {
+    pre[data-theme] {
+      color: var(--shiki-light);
+      background-color: var(--shiki-light-bg);
+      }
+    pre[data-theme] .line--highlighted {
+      background-color: transparent;
+    }
+    pre[data-theme] .word--highlighted {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+    pre[data-theme] code span {
+      color: var(--shiki-light);
+    }
+  }
+}

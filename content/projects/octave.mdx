@@ -13,49 +13,49 @@ skills: Typescript, Next.js, Github Issues, Firebase, Databases, Frontend Web De
 - Responsive, functions the same on mobile.
 - Search page
 - Accounts
-	- Uses sign in with Google
-	- Each account can have playlists and saved songs
+  - Uses sign in with Google
+  - Each account can have playlists and saved songs
 - Fully functional playlists
-	- Playlists have visibility settings (i.e only the user can see the playlist or they can make it public)
+  - Playlists have visibility settings (i.e. only the user can see the playlist or they can make it public)
 - Shuffling playlists & albums
 - Album views
 - Backend
-	- Assigns each requested song a youtube video (optimized to not return music videos that have added distracting parts)
-	- Spotify API token distribution
+  - Assigns each requested song a youtube video (optimized to not return music videos that have added distracting parts)
+  - Spotify API token distribution
 - Full screen player view
 - Caches recently played tracks' info using localstorage (streaming url, youtube ID)
 - Settings 
 - Streams audio, programmatically controlls the playback from any part of the application
-	- *Note: Octave does not actually play music, it only plays royalty-free audio to demonstrate the playback capabilities*
+  - *Note: Octave does not actually play music, it only plays royalty-free audio to demonstrate the playback capabilities*
 
 ## Architecture
 - Next.js
 - Typescript
 - Firebase
-	- **Firestore:** User account info, playlists, saves tracks with a corresponding youtube idc
-	- **Cloud Functions:** Serverless Node.js-based functions to act as my backend
-	- App Hosting
-	- Authentication 
+  - **Firestore:** User account info, playlists, saves tracks with a corresponding youtube id
+  - **Cloud Functions:** Serverless Node.js-based functions to act as my backend
+  - App Hosting
+  - Authentication 
 - Tailwind CSS
 - **Onedrive file hosting:** Streaming royalty-free audio
-- **Spoitfy API:** Search for songs and albums, get album for album views
+- **Spotify API:** Search for songs and albums, get album for album views
 
 
 ## Problems Faced
 
 ### Maintaining a Long-Term project
 - I originally used the React-Router framework in 2021 & 2022, but updated to Next.js in early 2024.
-	- During which, I updated my fully javascript codebase to typescript. This was a much needed change.
+  - During which, I updated my fully javascript codebase to typescript. This was a much needed change.
 - I ported the application from a self-hosted version, to Google Cloud's experimental firebase hosting with Next.js, and now to the officially supported Firebase app hosting
 
 
 ### Hosting on Firebase using Next.js 14
 - Every time I navigated using `<Link>` there would be a full page reload
 - This behavior reset the app state between pages
-	- Caused the app to completely forget the currently playing song, and had to re-fetch the authentication state
-	- Solution: force-dynamic on the root route:
+  - Caused the app to completely forget the currently playing song, and had to re-fetch the authentication state
+  - Solution: force-dynamic on the root route:
 ```typescript
-//	app/layout.tsx
+// app/layout.tsx
 
 export const dynamic = "force-dynamic"
 ```

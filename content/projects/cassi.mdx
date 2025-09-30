@@ -16,8 +16,8 @@ Options trading is a **complex** and **risky activity**, with many pitfalls that
 - Uses multi-threading to take advantage of all n CPU cores on the machine (I have 10, so this provided an incredible speed boost)
 - Takes in all of the strike prices on the option chain, along with each bid and ask for each put and call. Every reasonable combination is then evaluated using the following method:
 - Uses two log-normal probability distributions:
-	- A volatility distribution to weigh the probability of a range of possible volatilities over the life of the option
-	- For each range of volatilities, the midpoint is passed as the volatility into the Black-Scholes model. I use this model to find the expected value of the given combination.
+  - A volatility distribution to weigh the probability of a range of possible volatilities over the life of the option
+  - For each range of volatilities, the midpoint is passed as the volatility into the Black-Scholes model. I use this model to find the expected value of the given combination.
 - Once the expected value of each combination is found, all of the combinations are then sorted and we use the top 5
 
 ### Notion (Frontend)
